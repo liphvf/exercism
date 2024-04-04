@@ -128,25 +128,23 @@ fn struct_example() {
     println!("{:?}", accumulator);
 }
 
-fn struct_example2() {
-    let mut accumulator = Accumulator::new(0);
+// fn struct_example2() {
+//     let mut accumulator = Accumulator::new(0);
 
-    for n in 3..10 {
-        accumulator = accumulator.add(n);
-    }
+//     for n in 3..10 {
+//         accumulator = accumulator.add(n);
+//     }
 
-
-    println!("{}", accumulator.get());
-}
+//     println!("{}", accumulator.get());
+// }
 
 fn struct_example3() {
     let mut accumulator = Accumulator::new(0);
 
     for n in 3..10 {
-        accumulator = accumulator.add(n);
+        accumulator.add(n);
         println!("acc {}", accumulator.get())
     }
-
 
     // println!("{}", accumulator.get());
 }
@@ -191,9 +189,7 @@ impl Accumulator {
         self.sum
     }
 
-    fn add(self, incriment_value: i32) -> Self {
-        Self {
-            sum: self.sum + incriment_value
-        }
+    fn add(&mut self, incriment_value: i32) {
+        self.sum += incriment_value
     }
 }
