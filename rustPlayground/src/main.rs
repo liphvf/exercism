@@ -1,7 +1,10 @@
 use std::borrow::Borrow;
 
+mod exemple1;
+
 #[warn(non_snake_case)]
 fn main() {
+    exemple1::exemple1::interator();
     // let values = [1, 2, 3, 4, 5];
 
     // let mut sum = 0;
@@ -83,18 +86,6 @@ fn add(number1: i32, number2: i32) -> i32 {
     // Rust is an expression-based language
 }
 
-fn interator() {
-    let numbers = (3..10).inspect(|n| println!("n = {}", n));
-    let sum = 0;
-
-    let add = |n1: i32, n2: i32| n1 + n2;
-
-    for number in numbers {
-        add(sum, number);
-    }
-
-    println!("Sum of numbers is {}", sum)
-}
 
 fn interator2() {
     let numbers = (1..13)
