@@ -1,10 +1,11 @@
 use std::borrow::Borrow;
 
-mod exemple1;
+mod exemples;
+mod accumulator;
 
 #[warn(non_snake_case)]
 fn main() {
-    exemple1::exemple1::interator();
+    exemples::interators::interator();
     // let values = [1, 2, 3, 4, 5];
 
     // let mut sum = 0;
@@ -59,7 +60,7 @@ fn main() {
     // interator3();
     // struct_example();
     // struct_example2();
-    struct_example3();
+    // struct_example3();
 }
 
 // fn main() {
@@ -77,110 +78,3 @@ fn main() {
 
 //     println!("Sum of {} and {} is {}", a, b, sum);
 // }
-
-fn add(number1: i32, number2: i32) -> i32 {
-    return number1 + number2;
-    // também pode ser escrito como:
-    // number1 + number2
-    // o rust entende que a última expressão é o retorno da função
-    // Rust is an expression-based language
-}
-
-
-fn interator2() {
-    let numbers = (1..13)
-        .inspect(|n| println!("before filter n = {}", n))
-        .filter(|x| x % 2 == 0)
-        .inspect(|n| println!("after filter n = {}", n));
-    let sum = 0;
-
-    let add = |n1: i32, n2: i32| n1 + n2;
-
-    for number in numbers {
-        add(sum, number);
-    }
-
-    println!("Sum of numbers is {}", sum)
-}
-
-fn interator3() {
-    // Sum all odd numbers from 1 to 13
-    // let numbers = (1..13).filter(|x| x % 2 == 0).fold(0, |acc, x| acc + x);
-    // let numbers = (1..13).filter(|x| x % 2 == 0).sum::<i32>();
-    let numbers: i32 = (1..13).filter(|x| x % 2 == 0).sum();
-
-    println!("Sum of numbers is {}", numbers)
-}
-
-fn struct_example() {
-    // let accumulator = Accumulator { sum: 0 };
-    let accumulator = Accumulator::new(0);
-
-    println!("{:?}", accumulator);
-}
-
-// fn struct_example2() {
-//     let mut accumulator = Accumulator::new(0);
-
-//     for n in 3..10 {
-//         accumulator = accumulator.add(n);
-//     }
-
-//     println!("{}", accumulator.get());
-// }
-
-fn struct_example3() {
-    let mut accumulator = Accumulator::new(0);
-
-    for n in 3..10 {
-        accumulator.add(n);
-        println!("acc {}", accumulator.get())
-    }
-
-    // println!("{}", accumulator.get());
-}
-
-#[derive(Debug)] // utilizado para imprimir o conteúdo da struct
-struct Accumulator {
-    sum: i32,
-}
-
-// impl Accumulator { // isso é chamado de assosieated function
-//     fn new(init: i32) -> Accumulator {
-//         Accumulator { sum: init }
-//     }
-// }
-
-// impl AccumulatorImutable {
-//     // isso é chamado de assosieated function
-//     fn new(sum: i32) -> Self {
-//         // quando o nome da struct é o mesmo do tipo, pode ser utilizado Self
-//         Self { sum } // quando o parametro tem o mesmo nome da propriedade, pode ser utilizado apenas o nome do parametro
-//     }
-
-//     fn get(self) -> i32 {
-//         self.sum
-//     }
-
-//     fn add(self, incriment_value: i32) -> Self {
-//         Self {
-//             sum: self.sum + incriment_value
-//         }
-//     }
-// }
-
-impl Accumulator {
-    // isso é chamado de assosieated function
-    fn new(sum: i32) -> Self {
-        // quando o nome da struct é o mesmo do tipo, pode ser utilizado Self
-        Self { sum } // quando o parametro tem o mesmo nome da propriedade, pode ser utilizado apenas o nome do parametro
-    }
-
-    fn get(&self) -> i32 {
-        self.sum
-    }
-
-    fn add(&mut self, incriment_value: i32) {
-        self.sum += incriment_value
-    }
-}
